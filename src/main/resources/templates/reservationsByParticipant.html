@@ -1,0 +1,60 @@
+<!--(reservationsByParticipant.html) -->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Réservations par Participant</title>
+    <link rel="stylesheet" type="text/css"th:href="@{/css/reservationsByParticipants.css}" />
+</head>
+<body>
+	<div class="conteneur">
+        <div class="conteneur-gauche">
+            <!-- Contenu du conteneur de gauche -->
+            <div class="card">
+    <h1 th:text="${participant.nomParticipant}"></h1>
+    <p th:text="${participant.emailParticipant}"></p>
+    <p th:text="${participant.idParticipant}"></p>
+    <!-- Ajoutez d'autres informations si nécessaire -->
+</div>
+<h3 style="text-align: center; margin : 40px">Vos réservations s'affichent ici</h3>
+<div class="reservation-card" th:each="reservation : ${reservations}">
+    <p>
+        Date de début : <span th:text="${reservation.dateDebut}"></span><br>
+        Atelier : <span th:text="${reservation.atelier.nomAtelier}"></span><br>
+        ID de réservation: <span th:text="${reservation.idReservation}"></span><br>
+        <!-- Ajoutez d'autres informations que vous souhaitez afficher -->
+          <!-- Add a cancellation button for each reservation -->
+<form th:action="@{/reservations/delete}" method="post" th:object="${reservation}" id="deleteForm">
+    <input type="hidden" th:name="reservationId" th:value="${reservation.idReservation}" />
+    <button type="button" onclick="deleteAction()" class="back-button">Annuler la réservation</button>
+</form>
+    
+    <!--javascript pour delete avec l'id de reservation --> 
+<script th:inline="javascript">
+    function deleteAction() {
+        var form = document.getElementById('deleteForm');
+        form.action = /*[[@{/reservations/delete(id=${reservation.idReservation})}]]*/ '';
+        form.submit();
+    }
+</script>
+    </p>
+</div>
+        </div>
+        <div class="conteneur-droite">
+            <!-- Contenu du conteneur de droite -->
+               <div class="link-container">
+    <li><a th:href="@{/conditions}" class="back-button">Conditions d'utilisation</a></li>
+<li>
+    <a th:href="@{/showReservationForm(idParticipant=${participant.idParticipant})}" class="back-button">
+        Faire une nouvelle réservation
+    </a>
+</li>	<li><a href="/" class="back-button">Retour au Menu Principal</a></li>
+    </div>
+        </div>
+    </div>
+
+
+ 
+</body>
+</html>

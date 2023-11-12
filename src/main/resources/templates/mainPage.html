@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+		    <link rel="stylesheet" type="text/css"th:href="@{/css/mainPage.css}" />
+
+<head>
+    <meta charset="UTF-8">
+    <title>Page Principale</title>
+</head>
+<body>
+
+<h1>Bienvenue aux Ateliers Artisanaux</h1>
+<img th:src="@{/logo.png}" style="height: 150px;" > 
+
+<ul>
+    <li><a th:href="@{/reservations}" class="back-button">Obtenir toutes les réservations</a></li>
+    <li><a th:href="@{/artisans}" class="back-button">Qui sont nos artisans ?</a></li>
+    <li><a th:href="@{/login}" class="back-button">S'identifier</a></li>
+    <li><a th:href="@{/cancel}" class="back-button">Annuler une réservation</a></li>
+    <li><a th:href="@{/conditions}" class="back-button">Conditions d'utilisation</a></li>
+</ul>
+
+</body>
+</html>

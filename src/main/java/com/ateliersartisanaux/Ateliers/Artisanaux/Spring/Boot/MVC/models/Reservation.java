@@ -2,7 +2,8 @@ package com.ateliersartisanaux.Ateliers.Artisanaux.Spring.Boot.MVC.models;
 
 import java.time.LocalDate; // Utilisez LocalDate pour représenter uniquement la date
 
-import jakarta.persistence.CascadeType;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,18 +18,19 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idReservation")
     private Long idReservation;
-
+    
+    @DateTimeFormat(pattern = "MM/dd/yyyy")
     private LocalDate dateDebut;
     
-    @ManyToOne(cascade = CascadeType.ALL) // cascade all operations to Atelier
+    @ManyToOne
     @JoinColumn(name = "idAtelier")
     private Atelier atelier;
     
-    @ManyToOne(cascade = CascadeType.ALL) // cascade all operations to Atelier
+    @ManyToOne
     @JoinColumn(name = "idParticipant")
     private Participant participant;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     @JoinColumn(name = "idCreneau")
     private CreneauHoraire creneauHoraire;
     

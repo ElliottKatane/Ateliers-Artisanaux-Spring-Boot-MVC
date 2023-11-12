@@ -122,15 +122,23 @@ public class ReservationController {
             return "redirect:/reservations"; // redirect
         }
 
+    	// récupère la liste de tous les ateliers pour le formulaire (option/select)
+    	List<Atelier> ateliers = atelierService.getAllAtelier();
+    	// récupère les créneaux
+    	List<CreneauHoraire> creneauxHoraire = creneauHoraireService.getAllCreneauHoraire();
         // Appeler le service pour obtenir les réservations par participant
         List<Reservation> reservations = reservationService.getReservationsByParticipantEmail(email);
         
         // Appeler le service pour obtenir les informations du participant
         Participant participant = participantService.getParticipantByEmail(email);
+        
+
 
         // Ajouter les réservations au modèle pour les afficher dans la vue
         model.addAttribute("reservations", reservations);
         model.addAttribute("participant", participant);
+        model.addAttribute("ateliers", ateliers);
+        model.addAttribute("creneauxHoraire", creneauxHoraire);
 
         return "reservationsByParticipant"; // le nom de la vue Thymeleaf
     }
